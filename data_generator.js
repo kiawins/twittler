@@ -6,6 +6,7 @@
 // set up data structures
 window.streams = {};
 streams.home = [];
+streams.notDisplayed = [];
 streams.users = {};
 streams.users.shawndrost = [];
 streams.users.sharksforcheap = [];
@@ -18,6 +19,7 @@ var addTweet = function(newTweet){
   var username = newTweet.user;
   streams.users[username].push(newTweet);
   streams.home.push(newTweet);
+  streams.notDisplayed.push(newTweet);
 };
 
 // utility function
