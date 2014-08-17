@@ -3,6 +3,7 @@
   <head>
     <script src="jquery.js"></script>
     <script src="data_generator.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
   </head>
   <body>
     <script>
@@ -15,8 +16,16 @@
         var index = streams.notDisplayed.length - 1;
         while(index >= 0){
           var tweet = streams.notDisplayed[index];
+          var $name = $('<div></div>');
           var $tweet = $('<div></div>');
-          $tweet.text('@' + tweet.user + ', [' + tweet.created_at + ' ] : ' + tweet.message);
+          var $date = $('<div></div>');
+          $name.text('@' + tweet.user).addClass("name");
+          $date.text(tweet.created_at).addClass("date");
+
+          $tweet.text(tweet.message).addClass("message");
+
+          $name.appendTo($body);
+          $date.appendTo($body);
           $tweet.appendTo($body);
           delete streams.notDisplayed[index];
           index -= 1;

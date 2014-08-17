@@ -1,0 +1,16 @@
+.message {
+  border-bottom: 1px solid #F1F1F1;
+  margin: 0.5em 0 0.5em 0;
+  padding: 0em 0 0.5em 0;
+}
+
+.name{
+  display: inline;
+  color: rgb(17, 160, 255);
+}
+.date{
+  display: inline;
+  color: #C0C0C0;
+  font-size: 0.8em;
+  float:right;
+}
