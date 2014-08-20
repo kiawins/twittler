@@ -1,3 +1,8 @@
+.messageBlock{
+  display: block;
+  width: 500px;
+}
+
 .message {
   border-bottom: 1px solid #F1F1F1;
   margin: 0.5em 0 0.5em 0;
@@ -5,12 +10,26 @@
 }
 
 .name{
-  display: inline;
+  display: inline-block;
   color: rgb(17, 160, 255);
 }
+
 .date{
-  display: inline;
+  display: inline-block;
   color: #C0C0C0;
   font-size: 0.8em;
-  float:right;
+  float: right;
+}
+
+.user-message{
+  color: gray;
+  background-color: rgb(252,252,252);
+  margin-left: 20px;
+}
+
+.user-date{
+  display: block;
+  color: #C0C0C0;
+  font-size: 0.8em;
+  margin-left: 20px;
 }
