@@ -11,26 +11,30 @@
       $(document).ready(function(){
         var $body = $('body');
         $body.html('');
+          var prevLength;
 
-      setInterval(function(){
-        var index = streams.notDisplayed.length - 1;
-        while(index >= 0){
-          var tweet = streams.notDisplayed[index];
-          var $name = $('<div></div>');
-          var $tweet = $('<div></div>');
-          var $date = $('<div></div>');
-          $name.text('@' + tweet.user).addClass("name");
-          $date.text(tweet.created_at).addClass("date");
+        setInterval(function(){
+          if (!prevLength){
+            prevLength = 0;
+          }
+          var index =  streams.home.length - 1;
+          while(index >= prevLength){
+            var tweet = streams.home[index];
+            var $name = $('<div></div>');
+            var $tweet = $('<div></div>');
+            var $date = $('<div></div>');
+            $name.text('@' + tweet.users).addClass("name");
+            $date.text(tweet.created_at).addClass("date");
 
-          $tweet.text(tweet.message).addClass("message");
+            $tweet.text(tweet.message).addClass("message");
 
-          $name.appendTo($body);
-          $date.appendTo($body);
-          $tweet.appendTo($body);
-          delete streams.notDisplayed[index];
-          index -= 1;
-        }
-      }, 500);
+            $name.appendTo($body);
+            $date.appendTo($body);
+            $tweet.appendTo($body);
+            index -= 1;
+          }
+          prevLength = streams.home.length;
+        }, 500);
 
       });
 
