@@ -34,7 +34,7 @@
             $timeline = $('<div></div>');
             var $tweet = $('<div></div>');
             var $date = $('<div></div>');
-            $timeline.addClass('.timeline');
+            $timeline.addClass('timeline');
             $timeline.appendTo($body);
             $tweet.text(tweet.message).addClass("user-message");
             $date.text(dateTime(tweet.created_at)).addClass("user-date");
@@ -44,6 +44,7 @@
           }
           $('.backbutton').on('click', function(){
             $('.timeline').detach();
+            $('.backbutton').detach();-
             $showButton.appendTo($body);
             $removedMessages.appendTo($body);
           });
@@ -75,8 +76,6 @@
             }
             prevLength = streams.home.length;
           });
-
-
       });
 
     </script>
