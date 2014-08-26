@@ -9,60 +9,77 @@
     <script>
       $(document).ready(function(){
         var $body = $('body');
-        $body.html('');
+        // $body.html('');
           var prevLength;
+          var $removedMessages;
+          var $showButton;
+          var $timeline;
+          var $back;
 
         var dateTime = function(time) {
           return  (((time.getMonth()+1) < 10)?"0":"") + (time.getMonth()+1) + "/" + ((time.getDate() < 10)?"0":"") + time.getDate() +"/"+ time.getFullYear() + " @ " + ((time.getHours() < 10)?"0":"") + time.getHours() +":"+(((time.getMinutes()+1) < 10)?"0":"") + (time.getMinutes()+1) +":"+ ((time.getSeconds() < 10)?"0":"") + time.getSeconds();
         }
 
-
-
-        setInterval(function(){
-          if (!prevLength){
-            prevLength = 0;
-          }
-          var index =  streams.home.length - 1;
-          while(index >= prevLength){
-            var tweet = streams.home[index];
-            var $messageBlock = $('<div></div>');
-            var $name = $('<div></div>');
-            var $tweet = $('<div></div>');
-            var $date = $('<div></div>');
-            $name.text('@' + tweet.user).addClass("name");
-            $date.text(dateTime(tweet.created_at)).addClass("date");
-
-            $tweet.text(tweet.message).addClass("message");
-            $messageBlock.addClass('messageBlock');
-
-            $messageBlock.appendTo($body);
-            $name.appendTo($messageBlock);
-            $date.appendTo($messageBlock);
-            $tweet.appendTo($messageBlock);
-            index -= 1;
-          }
-          prevLength = streams.home.length;
-        }, 500);
-        
-        $('.name').one('click', function(){
+        $('body').on('click', '.name', function(){
           var text = $(this).text();
           var name = text.slice(1, text.length);
           var userMessages = streams.users[name];
           var index =  userMessages.length - 1;
+          $removedMessages = $(".messageBlock").detach();
+          $showButton = $(".showbutton").detach();
+          $back = $('<button name="button" class = "backbutton">Back</button>');
+          $back.appendTo($body);
           while(index >= 0){
             var tweet = userMessages[index];
+            $timeline = $('<div></div>');
             var $tweet = $('<div></div>');
             var $date = $('<div></div>');
+            $timeline.addClass('.timeline');
+            $timeline.appendTo($body);
             $tweet.text(tweet.message).addClass("user-message");
             $date.text(dateTime(tweet.created_at)).addClass("user-date");
-            $date.appendTo($(this).parent('.messageBlock'));
-            $tweet.appendTo($(this).parent('.messageBlock'));
+            $date.appendTo($timeline);
+            $tweet.appendTo($timeline);
             index -= 1;
           }
+          $('.backbutton').on('click', function(){
+            $('.timeline').detach();
+            $showButton.appendTo($body);
+            $removedMessages.appendTo($body);
+          });
         });
+
+
+          $('.showbutton').on('click', function(){
+            if (!prevLength){
+              prevLength = 0;
+            }
+            var index =  streams.home.length - 1;
+            while(index >= prevLength){
+              var tweet = streams.home[index];
+              var $messageBlock = $('<div></div>');
+              var $name = $('<div></div>');
+              var $tweet = $('<div></div>');
+              var $date = $('<div></div>');
+              $name.text('@' + tweet.user).addClass("name");
+              $date.text(dateTime(tweet.created_at)).addClass("date");
+
+              $tweet.text(tweet.message).addClass("message");
+              $messageBlock.addClass('messageBlock');
+
+              $messageBlock.appendTo($body);
+              $name.appendTo($messageBlock);
+              $date.appendTo($messageBlock);
+              $tweet.appendTo($messageBlock);
+              index -= 1;
+            }
+            prevLength = streams.home.length;
+          });
+
 
       });
 
     </script>
+    <button name="button" class="showbutton">Show me</button>
   </body>
 </html>
